@@ -1,8 +1,16 @@
+language: python
+branches:
+  only:
+  - master
+before_install:
+- pip install mkdocs
 script:
-- mkdir site
-- echo "Hello, World! `date`" > site/index.html
+- mkdocs build
 deploy:
   provider: pages
   github-token: $GITHUB_TOKEN
   skip-cleanup: true
   local-dir: site
+  target-branch: gh-pages
+  on:
+    branch: master
